@@ -1,0 +1,1 @@
+# Trello: https://trello.com/invite/b/Qux8WxLf/ATTI0e11372142958f1b92df98356a673d91034E4A21/projecte-python
