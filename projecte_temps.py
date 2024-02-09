@@ -28,30 +28,6 @@ else:
 
 import requests  # Importa la biblioteca requests para realizar solicitudes HTTP
 
-def return_weather(city):
-    url = f"https://es.wttr.in/{city}?format=j1"  # Construye la URL para solicitar información meteorológica de la ciudad especificada en español y en formato JSON
-    
-    response = requests.get(url)  # Realiza una solicitud GET a la URL construida
-    weather_dic = response.json()  # Convierte la respuesta JSON en un diccionario de Python
-    
-    # Extrae la temperatura actual y la descripción del clima del diccionario de clima
-    temp_c = weather_dic["current_condition"][0]['temp_C']  
-    desc_temp = weather_dic["current_condition"][0]['lang_es']
-    desc_temp = desc_temp[0]['value']  
-    
-    return temp_c, desc_temp  # Devuelve la temperatura actual y la descripción del clima
-
-def main():
-    city = input("Digui el nom d'una ciutat: ")  # Solicita al usuario que introduzca el nombre de una ciudad
-    temp_c, desc_temp = return_weather(city)  # Llama a la función return_weather para obtener la temperatura actual y la descripción del clima
-    print(f"La temperatura actual de {city} es {temp_c} °C. {desc_temp}.")  # Imprime la temperatura actual y la descripción del clima de la ciudad especificada en español
-
-if __name__ == '__main__':
-    main()  # Llama a la función main si el script se ejecuta directamente
-
-#EL QUE HI HA A SOTA D'AQUESTA LINEA ES SIMPLEMENT EXPERIMENTACIÓ
-
-
 
 #import requests
 API_Key = "d206fdab52fec3ab264e1f0d49aa16ba"
@@ -72,20 +48,20 @@ if get_weather.status_code == 200:
     data = get_weather.json()
     weather_unscripted = data
     #we check what information we get from the json file. 
-    print(weather_unscripted)
+    
 
 #weather
     weather = data['weather'][0]['description']
-    print(f"The current weather is: {weather}")
+    print(f"El temps en aquesta ciutat és: {weather}")
 #temperature (converting it to Celsius)
     temp = round(data['main']['temp'] - 273.15, 2)
-    print(f"The current temperature is: {temp}")
+    print(f"La temperatura és de: {temp}ºC, la qual es {(temp * 9 / 5) + 32 }ºF")
 #Feels Like (converting it to Celsius)
     feels_like = round(data['main']['feels_like'] - 273.15, 2)
-    print(f"Feels Like: {feels_like}")
+    print(f"Sensació térmica: {feels_like}ºC")
 #Humidity
     Humid = data['main']['humidity']
-    print(f"Humidity: {Humid}")
+    print(f"Humitat: {Humid}%")
 #Wind Speed
     Wind = data['wind']['speed']
-    print(f"Wind Speed: {Wind}")
+    print(f"La velocitat del vent és de: {Wind}")
