@@ -14,6 +14,8 @@ def registrar_usuario(nom_login):
 
         # Puedes agregar más información del usuario aquí si lo deseas
 
+
+
 nom = input("Digui el seu nom/usuari: ")
 contra = input("Digui la seva contrasenya: ")
 
@@ -64,6 +66,16 @@ request_url = f"{Base_url}?appid={API_Key}&q={city}"
 # we'll store the response code here in get_weather
 get_weather = requests.get(request_url)
 
+# Importar llibreria per les co-ordenadas
+from geopy.geocoders import Nominatim
+
+# Initialize Nominatim API
+geolocator = Nominatim(user_agent="MyApp")
+
+location = geolocator.geocode(city)
+
+lat = location.latitude
+lon = location.longitude
 #extracting the Json file
 if get_weather.status_code == 200:
     data = get_weather.json()
@@ -93,6 +105,8 @@ ventana = tk.Tk()
 ventana.title("Projecte Python 2023-2024 | Jofre i Ivan")
 Ciutat_e = tk.Label(ventana, text=f"Ciutat seleccionada: {city}")
 Ciutat_e.pack()
+lon_e = tk.Label(ventana, text=f"Co-ordenadas: {lat} , {lon}")
+lon_e.pack()
 weather_e = tk.Label(ventana, text=f"Temperatura: {temp}ºC, el qual es {(temp * 9 / 5) + 32}ºF")
 weather_e.pack()
 feels_e = tk.Label(ventana, text=f"Sensació térmica: {feels_like}ºC, el qual es {(feels_like * 9 / 5) + 32}ºF")
@@ -107,3 +121,6 @@ etiqueta = tk.Label(ventana)
 etiqueta.pack(padx=100, pady=100) # Añadir la etiqueta a la ventana
 
 ventana.mainloop()
+
+#Informació Localització Ciutat
+#Co-ordenadas
